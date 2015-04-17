@@ -1,12 +1,11 @@
 from flask_sqlalchemy import SQLAlchemy
-from example import app
 
 db = SQLAlchemy()
 
 
 class ShortURL(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    short_url = db.Column(db.String(10), index=True, Unique = True)
+    short_url = db.Column(db.String(10), index=True)
     url = db.Column(db.String(255))
     url_title = db.Column(db.String(511))
  

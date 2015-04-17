@@ -1,0 +1,23 @@
+<html>
+<head>
+
+<title>{{ short_url.page_title }}</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"/>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/short_url.css') }}"/>
+
+</head>
+
+<body>
+
+<iframe id="original-url-iframe" src="{{ short_url.url }}" frameborder="0"></iframe>
+
+<div class="omnibox">
+</div>
+
+
+<script>window.location.hash = '{{ short_url.url }}';</script>
+
+</body>
+
+</html>

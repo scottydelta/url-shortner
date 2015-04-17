@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from flaskext.script import Manager, Shell, Server
+from flask.ext.script import Manager, Shell, Server
 from shortner import app
 
 manager = Manager(app)
