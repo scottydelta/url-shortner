@@ -1,9 +1,11 @@
-from flask import Flask, render_template, request, redirect, url_for, abort, session
+from flask import Flask, render_template, request, redirect, url_for, abort, session, jsonify
 from models import ShortURL, db
 from utils import get_page_title, generate_random_string
+import settings
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'this_should_have_been_random';
+app = Flask(__name__, static_url_path='/static')
+app.config['SECRET_KEY'] = 'this_should_have_been_random'
+app.config.from_object(settings)
 db.init_app(app)
 
 @app.route('/')
@@ -26,7 +28,7 @@ def create_short_url():
     db.session.commit()
 
     return jsonify({
-        'url': url_for('short_url', slug=short_url.short_url, _external=True)
+        'url': url_for('short_url', shorturl=shorturl.short_url, _external=True)
     })
 
 @app.route('/s/<shorturl>')

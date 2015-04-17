@@ -1,0 +1,28 @@
+#original-url-iframe {
+    width: 100%;
+    height: 100%;
+}
+
+.adbox {
+    position: fixed;
+    bottom: 50px;
+    left: 50px;
+
+    width: 250px;
+    height: 100px;
+
+    padding: 15px;
+
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+
+    -moz-box-shadow: 0 0 10px #CCCECC;
+    -webkit-box-shadow: 0 0 10px #CCCECC;
+    box-shadow: 0 0 10px #CCCECC;
+
+    background-color: #fff;
+
+    z-index: 10;
+}
+
