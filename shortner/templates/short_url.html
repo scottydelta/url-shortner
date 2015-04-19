@@ -4,7 +4,7 @@
 <title>{{ short_url.page_title }}</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"/>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/adbox.css') }}"/>
+<link rel="stylesheet" href="/static/css/box.css"/>
 
 </head>
 
@@ -12,7 +12,8 @@
 
 <iframe id="original-url-iframe" src="{{ short_url.url }}" frameborder="0"></iframe>
 
-<div class="adbox">
+<div class="box">
+Show an Ad here
 </div>
 
 

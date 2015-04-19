@@ -3,13 +3,13 @@
     height: 100%;
 }
 
-.adbox {
+.box {
     position: fixed;
-    bottom: 50px;
-    left: 50px;
+    bottom: 30px;
+    left: 30px;
 
-    width: 250px;
-    height: 100px;
+    width: 150px;
+    height: 60px;
 
     padding: 15px;
 
@@ -21,8 +21,8 @@
     -webkit-box-shadow: 0 0 10px #CCCECC;
     box-shadow: 0 0 10px #CCCECC;
 
-    background-color: #fff;
+    background-color: #337AB7;
+    color: #fff;
 
     z-index: 10;
 }
-

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, abort, session, jsonify
+from flask import Flask, render_template, request, redirect, url_for, abort, session, jsonify, send_from_directory
 from models import ShortURL, db
 from utils import get_page_title, generate_random_string
 import settings
@@ -11,6 +11,10 @@ db.init_app(app)
 @app.route('/')
 def home():
     return render_template('index.html')
+
+#@app.route('/static/css/<path:path>')
+#def send_css(path):
+#    return send_from_directory('css', path)
 
 @app.route('/create-short-url', methods=('POST', ))
 def create_short_url():
