@@ -23,26 +23,37 @@ def create_short_url():
     print url, custom_url
     # Fetch the page title of the url
     # This function call can be made asynchronous to improve response time
-    #page_title = get_page_title(url)
-    page_title = ""
+    page_title = get_page_title(url)
     short_url = custom_url if custom_url!="" else generate_random_string()
+    short_url_ = ShortURL.query.filter_by(short_url=short_url).first()
+    if short_url_:
+        return jsonify({
+        'error': 'Link already exists, try a different custom keyword!'
+	})
+    print "here"
     # Create the short url instance
     shorturl = ShortURL(url=url, short_url=short_url, url_title=page_title)
     db.session.add(shorturl)
     db.session.commit()
 
     return jsonify({
-        'url': url_for('short_url', shorturl=shorturl.short_url, _external=True)
+        'url_withad': url_for('short_url_ad', shorturl=shorturl.short_url, _external=True),
+        'url_withre': url_for('short_url_re', shorturl=shorturl.short_url, _external=True)
     })
 
-@app.route('/s/<shorturl>')
-def short_url(shorturl):
+@app.route('/a/<shorturl>')
+def short_url_ad(shorturl):
     short_url_ = ShortURL.query.filter_by(short_url=shorturl).first()
-
     if not short_url_:
         return abort(404)
-
     return render_template('short_url.html', short_url=short_url_)
+
+@app.route('/r/<shorturl>')
+def short_url_re(shorturl):
+    short_url_ = ShortURL.query.filter_by(short_url=shorturl).first()
+    if not short_url_:
+        return abort(404)
+    return redirect(short_url_.url)
 
 if __name__ == '__main__':
     with app.app_context():

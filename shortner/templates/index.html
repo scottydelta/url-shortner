@@ -10,8 +10,9 @@
 
     <h3 style="margin: 100px 0 70px; text-align: center;">Create Short URL</h3>
 
-    <div id="short-url-alert" class="alert alert-success" style="display: none;">Short URL: <a href="#" target="_blank"></a></div>
-
+    <div id="short-url-alert-ad" class="alert alert-success" style="display: none;">Short URL with Adbox: <a href="#" target="_blank"></a></div>
+    <div id="short-url-alert-re" class="alert alert-success" style="display: none;">Short URL with Redirect: <a href="#" target="_blank"></a></div>
+    <div id="short-url-alert" class="alert alert-danger" style="display: none;">Error:</div>
     <form id="create-short-url-form" class="form-horizontal" action="{{ url_for('create_short_url') }}">
 
 
@@ -25,7 +26,7 @@
         <div class="form-group">
             <label for="custom_url" class="control-label col-sm-2">Custom URL</label>
             <div class="col-sm-10">
-                <input type="text" name="custom_url" id="custom_url" class="form-control" placeholder="Custom URL" max="10" required/>
+                <input type="text" name="custom_url" id="custom_url" class="form-control" placeholder="Custom URL" max="10"/>
             </div>
         </div>
 
@@ -50,9 +51,19 @@
                 url: '{{ url_for('create_short_url') }}',
                 data: $(this).serialize(),
                 success: function(res) {
-                    var shortURLAlert = $('#short-url-alert');
-                    shortURLAlert.find('a').attr('href', res.url).text(res.url);
-                    shortURLAlert.show();
+                    if("error" in res){
+		    	    $('#short-url-alert').text(res.error);
+			    $('#short-url-alert').show();
+		            $('#short-url-alert-ad').hide();
+		            $('#short-url-alert-re').hide();
+		    }
+		    else{
+		            $('#short-url-alert-ad').find('a').attr('href', res.url_withad).text(res.url_withad);
+		            $('#short-url-alert-re').find('a').attr('href', res.url_withre).text(res.url_withre);
+			    $('#short-url-alert').hide();
+		            $('#short-url-alert-ad').show();
+		            $('#short-url-alert-re').show();
+		    }
                 }
             })
         });
